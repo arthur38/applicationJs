@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="./lib/angular/angular.js" type="text/javascript"></script>
+    <script src="./assets/js/controllers/hello.js" type="text/javascript"></script>
+    <script src="./assets/js/controllers/contact.js" type="text/javascript"></script>
+    <script src="./assets/js/controllers/checkin.js" type="text/javascript"></script>
+    <script src="./assets/js/app.js" type="text/javascript"></script>
+  </head>
+  <body ng-controller="checkinController as checkinCtrl">
+
+    <div ng-repeat="check in checkin">
+      <ul>
+        <li>{{ check.id }}</li>
+        <li>{{ check.user.name }}</li>
+      </ul>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- <div ng-controller="helloController as helloCtrl">
+          <label>Name:</label>
+          <input type="text" ng-model="yourName" placeholder="Enter a name here">
+
+          <hr>
+          <h1>Hello {{yourName}}!</h1>
+          <p ng-bind='helloCtrl.afficheLongueur(yourName)'></p>
+          <p>{{helloCtrl.upperChaine(yourName)}} </p>
+          <ul >
+            <li ng-repeat="lettre in helloCtrl.splitToList(yourName) track by $index">{{lettre}}</li>
+          </ul>
+    </div>
+
+    <div ng-controller='contactController as contactCtrl'>
+      <div ng-repeat='contact in contactCtrl.contact'>{{contact.name}}, {{contact.phone}}
+      <div ng-bind='contact.name'></div>
+    </div>
+
+    <label>recherche: <input ng-model="searchText"></label>
+    <table ng-controller = 'contactController as contactCtrl'>
+      <tr><th>Nom</th><th>Phone</th></tr>
+      <tr ng-repeat="contact in contactCtrl.contact | filter:searchText">
+        <td>{{contact.name}}</td>
+        <td>{{contact.phone}}</td>
+      </tr>
+   </table>
+
+ </div> -->
+  </body>
+</html>
