@@ -1,0 +1,12 @@
+<h1>checkinDetails</h1>
+
+
+  <div  ng-controller="checkDetailsController as checkinD">
+    <map center= '{{ checkinDetails.lat }}' , '{{ checkinDetails.lng }}' zoom="8"></map>
+    <img src="{{ checkinDetails.user.picture }}" alt="" />
+    <ul>
+      <li>{{ checkinDetails.id }}</li>
+      <li>{{ checkinDetails.user.name }}</li>
+      <li>{{ checkinDetails.user.email }}</li>
+    </ul>
+  </div>

@@ -1,0 +1,8 @@
+li {
+  float: left;
+  list-style-type: none;
+  padding: 5px 3px 0 3px;
+  font-size: 25px;
+  color: black;
+  width: 20%;
+  text-align: center; }

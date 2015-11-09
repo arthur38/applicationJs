@@ -15,5 +15,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular-route": "~1.4.7",
+    "ngmap": "~1.13.15"
+  }
 }
