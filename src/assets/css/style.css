@@ -6,3 +6,6 @@ li {
   color: black;
   width: 20%;
   text-align: center; }
+
+@media only screen and (max-width: 700) {
+  width: 50%; }
