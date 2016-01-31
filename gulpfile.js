@@ -1,6 +1,8 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var useref = require('gulp-useref');
 var browserSync = require("browser-sync").create();
+
 
  //creation d'une nouvelle tache : 'sass'
 gulp.task('sass', function () {
@@ -24,6 +26,16 @@ gulp.task('serve', ['sass'], function() {
 
     gulp.watch("src/assets/scss/**/*.scss", ['sass']);
     gulp.watch("src/*.html").on('change', browserSync.reload);
+});
+gulp.task('copy-angular-template', function(done){
+  gulp.src('src/assets/template/**/*')
+    .pipe(gulp.dest('www/assets/template/'))
+    .on('end', done);
+});
+gulp.task('make',['copy-angular-template'], function(){
+  return gulp.src('src/*.html')
+    .pipe(useref())
+    .pipe(gulp.dest('www'));
 });
 
 gulp.task('default', function() {
