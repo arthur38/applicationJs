@@ -4,10 +4,11 @@
     [
       'ngRoute',
       'ngMap',
-      
+
       'helloModule',
       'contactModule',
-      'checkinModule'
+      'checkinModule',
+      'LocalStorageModule'
     ])
 
   .config(function($routeProvider) {
