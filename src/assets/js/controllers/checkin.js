@@ -23,22 +23,78 @@
     })
 
     .controller('checkDetailsController', function($scope, $http, $routeParams) {
+      var getWeather = function(checkin) {
+        console.log(checkin);
+        $http({
+          method: 'GET',
+          url: 'http://api.openweathermap.org/data/2.5/weather?lat='+checkin.lat+'&lon='+checkin.lng+'&APPID=72dc62c8fb5c498073c30f58585331b7',
+          headers: {
+            'Content-Type': undefined
+          }
+          }).then(function successCallback(response) {
+          checkin.meteo = response.data;
+          }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+          });
+        }
 
       $http({
         method: 'GET',
         url: 'http://checkin-api.dev.cap-liberte.com/checkin/' +  $routeParams.checkinId
       }).then(function successCallback(response) {
+        var checkinDetails = response.data
+        var checkinDetailsLat = response.data.lat
+        var checkinDetailsLng = response.data.lng
+        getWeather(checkinDetails);
+        $scope.checkinDetails = checkinDetails;
+        $scope.checkinDetailsLat = checkinDetailsLat;
+        $scope.checkinDetailsLng = checkinDetailsLng;
+        checkinDetailsLat = parseFloat(checkinDetails.lat)
+        checkinDetailsLng = parseFloat(checkinDetails.lng);
+        console.log(typeof(checkinDetailsLng));
 
-        $scope.checkinDetails = response.data;
 
-      }, function errorCallback(response) {
+      } , function errorCallback(response) {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
       });
 
     })
+    .controller('checkSyncController', function($scope, $rootScope, $http, $routeParams, localStorageService) {
+      $scope.submit = function(){
+        var tabCheckIn = localStorageService.get('checkins');
+        console.log("tab" + tabCheckIn);
+        console.log("tab taille" + tabCheckIn.length);
+        for (var i = 0; i < tabCheckIn.length; i++) {
+          envoi(tabCheckIn,i);
+        }
+      }
+      function envoi(tab, i){
 
-    .controller('checkinFormController', function($scope, $rootScope, $http) {
+        $http({
+          method: 'POST',
+          url: 'http://checkin-api.dev.cap-liberte.com/checkin',
+          data : {
+            //envoie des données lors du submit
+            lat: tab[i].lat,
+            lng: tab[i].lng
+          },
+          headers: {
+            'Content-Type': undefined
+          }
+        }).then(function successCallback(response) {
+
+            $rootScope.$broadcast("listChange");
+
+        }, function errorCallback(response) {
+            console.log("error: "+response);
+        });
+        localStorageService.remove("checkins")
+      }
+    })
+
+    .controller('checkinFormController', function($scope, $rootScope, $http, localStorageService) {
 
         //Alimentation des input text avec les coordonnés de geolocalisation
         $scope.getLocation = function() {
@@ -51,35 +107,32 @@
                 $scope.lng = position.coords.longitude;
               })
             });
-          } else {
+          }else{
             console.log("Geolocation is not supported by this browser.");
           }
         };
 
         $scope.submit = function() {
 
-          $http({
-            method: 'POST',
-            url: 'http://checkin-api.dev.cap-liberte.com/checkin',
-            data : {
-              //envoie des données lors du submit
+        var checkIns = localStorageService.get('checkins');
+            if(checkIns == null){
+              checkIns=[];
+            }
+            var checkIn = {
               lat: $scope.lat,
               lng: $scope.lng
-            },
-            headers: {
-              'Content-Type': undefined
             }
-          }).then(function successCallback(response) {
+            checkIns.push(checkIn);
+            localStorageService.set('checkins', checkIns);
+            $rootScope.$broadcast("compteurChange");
+        }
+        $scope.$on("compteurChange", function() {
+          var tabCheckIn = localStorageService.get('checkins');
+          console.log(tabCheckIn);
+          console.log(tabCheckIn.length);
+          $scope.compteur=tabCheckIn.length;
+          console.log($scope.compteur);
 
-              $rootScope.$broadcast("listChange");
-
-          }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-          });
-        };
-    });
-
-
-
+        });
+      });
 })(window.angular);
