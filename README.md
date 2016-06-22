@@ -1,5 +1,4 @@
 <snippet>
-  <content><![CDATA[
 # applicationJs
 TODO: Write a project description
 ## Pre-requis
@@ -10,6 +9,5 @@ TODO: Write a project description
   Depuis le repertoire racine du projet): npm install bower install
 ##Lancement
   -gulp serve
-]]></content>
   <tabTrigger>readme</tabTrigger>
 </snippet>
