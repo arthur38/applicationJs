@@ -11,13 +11,16 @@
   "homepage": "",
   "ignore": [
     "**/.*",
-    "node_modules",
     "bower_components",
     "test",
     "tests"
   ],
   "dependencies": {
     "angular-route": "~1.4.7",
-    "ngmap": "~1.13.15"
+    "ngmap": "~1.13.15",
+    "gulp": "latest",
+    "gulp-sass":"latest",
+    "gulp-useref":"latest",
+    "browser-sync":"latest"
   }
 }
