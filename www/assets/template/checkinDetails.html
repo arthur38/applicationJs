@@ -1,0 +1,22 @@
+
+  <div class="detail" ng-controller="checkDetailsController as checkinD">
+    <h2>Informations personnelles</h2>
+    <div class="img">
+        <img ng-src="{{ checkinDetails.user.picture }}" />
+    </div>
+    <div class="info">
+      <ul>
+        <li>{{ checkinDetailsLat }}</li>
+        <li>{{ checkinDetailsLng }}</li>
+        <li>Name : {{ checkinDetails.user.name }}</li>
+        <li>Email : {{ checkinDetails.user.email }}</li>
+      </ul>
+    </div>
+    <h2 id="localisation">Localisation</h2>
+    <div class="map">
+        <map center= '{{ checkinDetailsLat }}' , '{{ checkinDetailsLng }}' zoom="8"></map>
+    </div>
+    <h2>Meteo</h2>
+      <p>{{checkinDetails.meteo.main.temp-273.15}} °C</p>
+      <p>{{checkinDetails.meteo.weather[0].description}}</p>
+  </div>

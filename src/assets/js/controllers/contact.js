@@ -5,7 +5,7 @@
       this.contact =
       [
         {
-          name: 'Joris Nicolas',
+          name: 'Arthur Bonnel',
           phone: '06 87 59 41 66'
         },
         {
