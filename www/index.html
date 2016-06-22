@@ -11,13 +11,18 @@
   <body>
     <header>
       <h1>Les effectifs</h1>
-      <div>
+      <div class="form">
         <form ng-init="getLocation()" ng-submit="submit()" ng-controller="checkinFormController">
           <input type="text" name="lat" ng-model="lat" placeholder="Latitude"/>
           <input type="text" name="lng" ng-model="lng" value="" placeholder="Longitude"/>
           <input type="submit" name="name" value="Ajouter">
+          <p ng-bind="compteur">
+          </p>
         </form>
       </div>
+      <form ng-submit="submit()" ng-controller="checkSyncController">
+        <input type="submit" name="name" value="sync">
+      </form>
     </header>
 
 
